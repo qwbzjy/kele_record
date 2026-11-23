@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  当前同步服务器先用 http://公网IP 形式访问，因此允许明文 HTTP。
+  Token 与照片会以明文经过网络，存在被窃听的风险。
+  配好域名 + HTTPS 后，请把 cleartextTrafficPermitted 改为 false，
+  并在 App 中把服务器地址改成 https://。
+-->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

@@ -1,0 +1,25 @@
+[Unit]
+Description=Cola Record sync service
+After=network.target
+
+[Service]
+Type=simple
+User=cola-sync
+Group=cola-sync
+WorkingDirectory=/opt/cola-sync
+EnvironmentFile=/etc/cola-sync.env
+ExecStart=/opt/cola-sync/venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8017 --proxy-headers
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=30
+
+# 基本加固
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/cola-sync
+ReadOnlyPaths=/opt/cola-sync
+
+[Install]
+WantedBy=multi-user.target
